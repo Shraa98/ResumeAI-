@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>ResumeAI - ATS Analysis</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&amp;family=Clash+Display:wght@500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "surface-bright": "#343949",
+                    "on-surface": "#dee1f7",
+                    "on-secondary": "#452b00",
+                    "surface": "#1E2A3B",
+                    "secondary": "#ffb955",
+                    "surface-tint": "#26dec2",
+                    "secondary-fixed": "#ffddb4",
+                    "on-tertiary-container": "#723f00",
+                    "on-tertiary-fixed-variant": "#6b3b00",
+                    "on-surface-variant": "#bacac5",
+                    "text-secondary": "#94A3B8",
+                    "primary": "#46f1d3",
+                    "secondary-fixed-dim": "#ffb955",
+                    "primary-container": "#00d4b8",
+                    "on-background": "#dee1f7",
+                    "on-error": "#690005",
+                    "on-primary-fixed-variant": "#005045",
+                    "primary-fixed": "#55fbde",
+                    "on-tertiary": "#4b2800",
+                    "border-muted": "#2A3A4E",
+                    "on-secondary-fixed": "#291800",
+                    "on-error-container": "#ffdad6",
+                    "tertiary-fixed-dim": "#ffb875",
+                    "outline": "#84948f",
+                    "tertiary": "#ffd0a7",
+                    "text-primary": "#F0EDE6",
+                    "secondary-container": "#dc9100",
+                    "surface-container-low": "#161b2b",
+                    "on-primary-fixed": "#00201b",
+                    "outline-variant": "#3b4a46",
+                    "on-tertiary-fixed": "#2d1600",
+                    "surface-container-high": "#25293a",
+                    "tertiary-fixed": "#ffdcc0",
+                    "inverse-surface": "#dee1f7",
+                    "surface-container-lowest": "#090e1c",
+                    "on-primary-container": "#00564a",
+                    "error": "#ffb4ab",
+                    "tertiary-container": "#ffaa55",
+                    "surface-container": "#1a1f2f",
+                    "primary-fixed-dim": "#26dec2",
+                    "inverse-on-surface": "#2b3040",
+                    "on-secondary-fixed-variant": "#633f00",
+                    "surface-container-highest": "#2f3445",
+                    "error-container": "#93000a",
+                    "surface-variant": "#2f3445",
+                    "surface-dim": "#0e1322",
+                    "on-primary": "#00382f",
+                    "background": "#0e1322",
+                    "inverse-primary": "#006b5c",
+                    "on-secondary-container": "#4f3100"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "spacing": {
+                    "max-width": "1440px",
+                    "margin-mobile": "16px",
+                    "margin-desktop": "32px",
+                    "gutter": "16px",
+                    "base": "4px"
+            },
+            "fontFamily": {
+                    "headline-md": ["Clash Display"],
+                    "body-md": ["DM Sans"],
+                    "mono-label": ["DM Sans"],
+                    "body-lg": ["DM Sans"],
+                    "headline-sm": ["Clash Display"],
+                    "label-md": ["DM Sans"],
+                    "body-sm": ["DM Sans"],
+                    "headline-lg-mobile": ["Clash Display"],
+                    "headline-lg": ["Clash Display"]
+            },
+            "fontSize": {
+                    "headline-md": ["32px", {"lineHeight": "1.2", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                    "body-md": ["15px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                    "mono-label": ["12px", {"lineHeight": "1", "letterSpacing": "0", "fontWeight": "500"}],
+                    "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                    "headline-sm": ["24px", {"lineHeight": "1.3", "fontWeight": "500"}],
+                    "label-md": ["12px", {"lineHeight": "1", "letterSpacing": "0.05em", "fontWeight": "700"}],
+                    "body-sm": ["13px", {"lineHeight": "1.4", "fontWeight": "400"}],
+                    "headline-lg-mobile": ["32px", {"lineHeight": "1.2", "fontWeight": "600"}],
+                    "headline-lg": ["48px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "600"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        ::-webkit-scrollbar { width: 4px; }
+        ::-webkit-scrollbar-track { background: #090e1c; }
+        ::-webkit-scrollbar-thumb { background: #2A3A4E; }
+        ::-webkit-scrollbar-thumb:hover { background: #46f1d3; }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-md overflow-hidden">
+<!-- Sidebar Navigation -->
+<aside class="fixed left-0 top-0 h-full flex flex-col z-50 w-[240px] bg-surface-container-lowest border-r border-border-muted">
+<div class="p-6">
+<div class="flex items-center gap-2 mb-8">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">description</span>
+<div class="font-headline-sm text-headline-sm font-semibold text-primary tracking-tight">ResumeAI</div>
+</div>
+<nav class="space-y-1">
+<a class="flex items-center gap-3 px-4 py-3 text-text-secondary hover:text-text-primary hover:bg-surface-container-high transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span>Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-primary border-l-2 border-primary bg-surface-container-high font-semibold" href="#">
+<span class="material-symbols-outlined" data-icon="description">description</span>
+<span>Resume</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-text-secondary hover:text-text-primary hover:bg-surface-container-high transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="record_voice_over">record_voice_over</span>
+<span>Interviews</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-text-secondary hover:text-text-primary hover:bg-surface-container-high transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="business">business</span>
+<span>Company Prep</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-text-secondary hover:text-text-primary hover:bg-surface-container-high transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span>Settings</span>
+</a>
+</nav>
+</div>
+<div class="mt-auto p-6 border-t border-border-muted">
+<button class="flex items-center gap-3 px-4 py-3 text-text-secondary hover:text-text-primary w-full transition-colors">
+<span class="material-symbols-outlined" data-icon="logout">logout</span>
+<span>Logout</span>
+</button>
+</div>
+</aside>
+<!-- Top App Bar -->
+<header class="flex items-center justify-between px-margin-desktop sticky top-0 z-40 ml-[240px] w-[calc(100%-240px)] h-16 bg-background border-b border-border-muted">
+<div class="flex items-center gap-4 bg-surface-container-low border border-border-muted px-4 py-1.5 w-96">
+<span class="material-symbols-outlined text-text-secondary text-sm">search</span>
+<input class="bg-transparent border-none focus:ring-0 text-sm w-full placeholder:text-text-secondary" placeholder="Search features..." type="text"/>
+</div>
+<div class="flex items-center gap-6">
+<span class="material-symbols-outlined text-text-secondary hover:text-primary cursor-pointer transition-colors" data-icon="notifications">notifications</span>
+<span class="material-symbols-outlined text-text-secondary hover:text-primary cursor-pointer transition-colors" data-icon="help_outline">help_outline</span>
+<div class="w-8 h-8 rounded-full bg-surface-container-high border border-border-muted overflow-hidden">
+<img alt="User Profile" class="w-full h-full object-cover" data-alt="A professional headshot of a software engineer in a modern dark office setting. The lighting is cold and clinical, focusing on the sharp features of the subject. The background shows blurred terminal screens and minimalist design elements consistent with a high-tech corporate environment." src="https://lh3.googleusercontent.com/aida-public/AB6AXuD9uBPmYzHYC7dAygX9X0Lp3A84WhWkN4VXUjtomWYMwScyXPM21Fx-qCcLvFURiT_Z3udRAks9PmQ5Q0W6K3_p0b5N25LJCfrbfgTqNvm2XfNi0742xSYnMZS1_Tb_s_yydo6ja80wksEV5BGXh4r8sxwCW9haz4JluW-ugq-h9lNkveevsa8o_jlJHjeoeaTdlafYnBauFtteWkclMmOQDnztzpX0w96cUoT_PyGWZAhEVSwLvMqyTxg_1yvxz_7KylA7E_gZ244"/>
+</div>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="ml-[240px] p-margin-desktop h-[calc(100vh-64px)] overflow-y-auto">
+<div class="max-w-[1440px] mx-auto h-full">
+<div class="grid grid-cols-1 md:grid-cols-[45%_55%] gap-gutter h-full">
+<!-- LEFT PANEL (45%) -->
+<section class="space-y-6">
+<div>
+<h1 class="font-headline-md text-headline-md text-text-primary">Analyze Resume</h1>
+<p class="text-text-secondary font-body-sm mt-1">Cross-reference your resume against specific job requirements for optimized ATS scoring.</p>
+</div>
+<!-- Upload Zone -->
+<div class="bg-surface border-2 border-dashed border-primary/40 p-8 flex flex-col items-center justify-center gap-3 transition-all hover:border-primary cursor-pointer">
+<span class="material-symbols-outlined text-primary text-4xl">upload_file</span>
+<p class="text-text-primary font-body-md">Drop your PDF here or click to upload</p>
+<p class="text-text-secondary text-xs uppercase tracking-widest font-bold">Max file size: 5MB</p>
+</div>
+<!-- Active File -->
+<div class="bg-surface-container-high border border-border-muted px-4 py-3 flex items-center justify-between">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary-container">article</span>
+<span class="text-text-primary font-body-sm font-medium">Arjun_Resume_v3.pdf</span>
+</div>
+<button class="text-text-secondary hover:text-error transition-colors">
+<span class="material-symbols-outlined text-sm">close</span>
+</button>
+</div>
+<!-- Text Area -->
+<div class="space-y-2">
+<label class="font-label-md text-text-secondary uppercase tracking-widest">Paste Job Description</label>
+<textarea class="w-full h-48 bg-surface-container-low border border-border-muted p-4 text-body-sm text-text-primary placeholder:text-text-secondary focus:border-primary focus:ring-0 transition-colors resize-none" placeholder="Paste the full job description here to identify missing keywords and required skills..."></textarea>
+</div>
+<!-- CTA -->
+<button class="w-full h-12 bg-primary text-on-primary font-bold font-label-md uppercase tracking-widest rounded-sm hover:brightness-110 active:scale-[0.99] transition-all">
+                        Run ATS Analysis
+                    </button>
+</section>
+<!-- RIGHT PANEL (55%) -->
+<section class="bg-surface border border-border-muted overflow-hidden flex flex-col">
+<div class="p-6 border-b border-border-muted flex items-center justify-between">
+<h2 class="font-headline-sm text-headline-sm text-text-primary">Analysis Report</h2>
+<span class="px-2 py-1 bg-surface-container-highest border border-border-muted text-[10px] font-bold text-text-secondary uppercase">Report ID: #ATS-9402</span>
+</div>
+<div class="p-8 flex-1 overflow-y-auto space-y-10">
+<!-- Score Gauge Area -->
+<div class="flex flex-col items-center justify-center py-4">
+<div class="relative w-48 h-48">
+<svg class="w-full h-full -rotate-90" viewbox="0 0 100 100">
+<circle cx="50" cy="50" fill="transparent" r="45" stroke="#2A3A4E" stroke-width="8"></circle>
+<circle cx="50" cy="50" fill="transparent" r="45" stroke="#46f1d3" stroke-dasharray="282.7" stroke-dashoffset="62.2" stroke-linecap="square" stroke-width="8"></circle>
+</svg>
+<div class="absolute inset-0 flex flex-col items-center justify-center">
+<span class="font-headline-lg text-headline-lg text-text-primary">78</span>
+<span class="font-label-md text-text-secondary uppercase tracking-widest -mt-1">ATS Score</span>
+</div>
+</div>
+</div>
+<!-- Data Columns -->
+<div class="grid grid-cols-2 gap-8">
+<!-- Keywords -->
+<div class="space-y-6">
+<div>
+<h3 class="font-label-md text-primary mb-3 flex items-center gap-2">
+<span class="material-symbols-outlined text-sm">check_circle</span>
+                                        Matched Keywords
+                                    </h3>
+<div class="flex flex-wrap gap-2">
+<span class="px-2 py-1 bg-primary/10 border border-primary/20 text-[11px] font-medium text-primary">Python</span>
+<span class="px-2 py-1 bg-primary/10 border border-primary/20 text-[11px] font-medium text-primary">FastAPI</span>
+<span class="px-2 py-1 bg-primary/10 border border-primary/20 text-[11px] font-medium text-primary">REST APIs</span>
+<span class="px-2 py-1 bg-primary/10 border border-primary/20 text-[11px] font-medium text-primary">Agile</span>
+</div>
+</div>
+<div>
+<h3 class="font-label-md text-error mb-3 flex items-center gap-2">
+<span class="material-symbols-outlined text-sm">cancel</span>
+                                        Missing Keywords
+                                    </h3>
+<div class="flex flex-wrap gap-2">
+<span class="px-2 py-1 bg-error/10 border border-error/20 text-[11px] font-medium text-error">Kubernetes</span>
+<span class="px-2 py-1 bg-error/10 border border-error/20 text-[11px] font-medium text-error">CI/CD</span>
+<span class="px-2 py-1 bg-error/10 border border-error/20 text-[11px] font-medium text-error">Docker</span>
+</div>
+</div>
+</div>
+<!-- Section Scores -->
+<div class="space-y-4">
+<h3 class="font-label-md text-text-secondary mb-3 uppercase tracking-widest">Section Health</h3>
+<div class="space-y-3">
+<div class="space-y-1">
+<div class="flex justify-between font-mono-label text-text-secondary">
+<span>Summary</span>
+<span>90%</span>
+</div>
+<div class="w-full h-1 bg-border-muted">
+<div class="h-full bg-primary" style="width: 90%;"></div>
+</div>
+</div>
+<div class="space-y-1">
+<div class="flex justify-between font-mono-label text-text-secondary">
+<span>Experience</span>
+<span>74%</span>
+</div>
+<div class="w-full h-1 bg-border-muted">
+<div class="h-full bg-secondary" style="width: 74%;"></div>
+</div>
+</div>
+<div class="space-y-1">
+<div class="flex justify-between font-mono-label text-text-secondary">
+<span>Skills</span>
+<span>68%</span>
+</div>
+<div class="w-full h-1 bg-border-muted">
+<div class="h-full bg-secondary" style="width: 68%;"></div>
+</div>
+</div>
+<div class="space-y-1">
+<div class="flex justify-between font-mono-label text-text-secondary">
+<span>Education</span>
+<span>100%</span>
+</div>
+<div class="w-full h-1 bg-border-muted">
+<div class="h-full bg-primary" style="width: 100%;"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Bottom Card: AI Suggestions -->
+<div class="bg-surface-container-low border-l-2 border-secondary p-5">
+<h3 class="font-label-md text-secondary mb-3 uppercase tracking-[0.1em] flex items-center gap-2">
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">bolt</span>
+                                AI Optimization Suggestions
+                            </h3>
+<ul class="space-y-2">
+<li class="flex gap-2 text-body-sm text-text-primary">
+<span class="text-secondary">•</span>
+<span>Quantify your achievements in 'FastAPI' development by adding metrics (e.g., "improved latency by 40%").</span>
+</li>
+<li class="flex gap-2 text-body-sm text-text-primary">
+<span class="text-secondary">•</span>
+<span>Explicitly mention 'Docker' in your 'DevOps' section to match high-priority job requirements.</span>
+</li>
+<li class="flex gap-2 text-body-sm text-text-primary">
+<span class="text-secondary">•</span>
+<span>The 'Summary' section is strong, but could benefit from more specific industry-standard terminology.</span>
+</li>
+</ul>
+</div>
+</div>
+</section>
+</div>
+</div>
+</main>
+<script>
+        // Micro-interaction for the Score Gauge
+        document.addEventListener('DOMContentLoaded', () => {
+            const gauge = document.querySelector('circle[stroke-dashoffset]');
+            if (gauge) {
+                // Animate gauge on load
+                const targetOffset = 62.2;
+                gauge.style.strokeDashoffset = '282.7';
+                setTimeout(() => {
+                    gauge.style.transition = 'stroke-dashoffset 1.5s cubic-bezier(0.65, 0, 0.35, 1)';
+                    gauge.style.strokeDashoffset = targetOffset;
+                }, 300);
+            }
+        });
+    </script>
+</body></html>

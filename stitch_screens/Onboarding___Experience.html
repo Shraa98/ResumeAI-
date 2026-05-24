@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>ResumeAI - Professional Background</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://api.fontshare.com/v2/css?f[]=clash-display@500,600,700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,700;1,9..40,400&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-secondary": "#452b00",
+                        "text-secondary": "#94A3B8",
+                        "on-error": "#690005",
+                        "text-primary": "#F0EDE6",
+                        "on-background": "#dee1f7",
+                        "on-tertiary-fixed-variant": "#6b3b00",
+                        "inverse-primary": "#006b5c",
+                        "error-container": "#93000a",
+                        "surface-container": "#1a1f2f",
+                        "surface-bright": "#343949",
+                        "on-primary-fixed": "#00201b",
+                        "inverse-on-surface": "#2b3040",
+                        "error": "#ffb4ab",
+                        "surface-dim": "#0e1322",
+                        "on-secondary-container": "#4f3100",
+                        "secondary-fixed": "#ffddb4",
+                        "tertiary": "#ffd0a7",
+                        "primary-fixed-dim": "#26dec2",
+                        "background": "#0e1322",
+                        "primary-container": "#00d4b8",
+                        "secondary-container": "#dc9100",
+                        "on-surface-variant": "#bacac5",
+                        "primary-fixed": "#55fbde",
+                        "surface-container-highest": "#2f3445",
+                        "on-tertiary-container": "#723f00",
+                        "on-primary-container": "#00564a",
+                        "on-secondary-fixed-variant": "#633f00",
+                        "on-secondary-fixed": "#291800",
+                        "secondary": "#ffb955",
+                        "tertiary-fixed": "#ffdcc0",
+                        "on-primary": "#00382f",
+                        "outline": "#84948f",
+                        "surface-container-low": "#161b2b",
+                        "surface": "#1E2A3B",
+                        "inverse-surface": "#dee1f7",
+                        "on-primary-fixed-variant": "#005045",
+                        "secondary-fixed-dim": "#ffb955",
+                        "on-tertiary": "#4b2800",
+                        "surface-container-lowest": "#090e1c",
+                        "outline-variant": "#3b4a46",
+                        "on-surface": "#dee1f7",
+                        "tertiary-fixed-dim": "#ffb875",
+                        "surface-container-high": "#25293a",
+                        "on-tertiary-fixed": "#2d1600",
+                        "surface-variant": "#2f3445",
+                        "border-muted": "#2A3A4E",
+                        "tertiary-container": "#ffaa55",
+                        "surface-tint": "#26dec2",
+                        "on-error-container": "#ffdad6",
+                        "primary": "#46f1d3"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "margin-desktop": "32px",
+                        "max-width": "1440px",
+                        "gutter": "16px",
+                        "margin-mobile": "16px",
+                        "base": "4px"
+                    },
+                    "fontFamily": {
+                        "body-sm": ["DM Sans"],
+                        "headline-lg": ["Clash Display"],
+                        "label-md": ["DM Sans"],
+                        "headline-sm": ["Clash Display"],
+                        "body-lg": ["DM Sans"],
+                        "headline-lg-mobile": ["Clash Display"],
+                        "headline-md": ["Clash Display"],
+                        "body-md": ["DM Sans"],
+                        "mono-label": ["DM Sans"]
+                    },
+                    "fontSize": {
+                        "body-sm": ["13px", {"lineHeight": "1.4", "fontWeight": "400"}],
+                        "headline-lg": ["48px", {"lineHeight": "1.1", "letterSpacing": "-02em", "fontWeight": "600"}],
+                        "label-md": ["12px", {"lineHeight": "1", "letterSpacing": "0.05em", "fontWeight": "700"}],
+                        "headline-sm": ["24px", {"lineHeight": "1.3", "fontWeight": "500"}],
+                        "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                        "headline-lg-mobile": ["32px", {"lineHeight": "1.2", "fontWeight": "600"}],
+                        "headline-md": ["32px", {"lineHeight": "1.2", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                        "body-md": ["15px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                        "mono-label": ["12px", {"lineHeight": "1", "letterSpacing": "0", "fontWeight": "500"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            background-color: #0e1322;
+            color: #dee1f7;
+            font-family: 'DM Sans', sans-serif;
+            -webkit-font-smoothing: antialiased;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-effect {
+            background: rgba(30, 42, 59, 0.6);
+            backdrop-filter: blur(12px);
+            border: 1px solid #2A3A4E;
+        }
+        .step-active::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background-color: #46f1d3;
+        }
+        .role-card-active {
+            border-color: #46f1d3;
+            background-color: rgba(70, 241, 211, 0.05);
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface">
+<!-- Top Navigation Anchor (Shared Component Hybrid) -->
+<header class="fixed top-0 left-0 w-full z-50 bg-background border-b border-border-muted">
+<div class="flex justify-between items-center w-full px-margin-desktop py-4 max-w-max-width mx-auto">
+<div class="font-headline-sm text-headline-sm font-semibold text-primary tracking-tight">ResumeAI</div>
+<div class="flex items-center gap-6">
+<button class="text-text-secondary hover:text-text-primary transition-all duration-150 flex items-center gap-2 font-label-md text-label-md">
+<span class="material-symbols-outlined" style="font-size: 20px;">help</span>
+                    Support
+                </button>
+</div>
+</div>
+</header>
+<main class="pt-24 pb-12 px-margin-mobile md:px-margin-desktop max-w-5xl mx-auto">
+<!-- Progress Indicator -->
+<nav class="flex items-center justify-start gap-8 mb-12 border-b border-border-muted/30 pb-4 overflow-x-auto whitespace-nowrap scrollbar-hide">
+<div class="relative group opacity-50 transition-opacity">
+<span class="font-label-md text-label-md text-text-secondary">01 IDENTITY</span>
+</div>
+<div class="relative group transition-opacity step-active">
+<span class="font-label-md text-label-md text-primary">02 EXPERIENCE</span>
+</div>
+<div class="relative group opacity-50 transition-opacity">
+<span class="font-label-md text-label-md text-text-secondary">03 GOALS</span>
+</div>
+<div class="relative group opacity-50 transition-opacity">
+<span class="font-label-md text-label-md text-text-secondary">04 OPTIMIZE</span>
+</div>
+</nav>
+<section class="grid grid-cols-1 md:grid-cols-12 gap-gutter">
+<!-- Left Column: Role Selection -->
+<div class="md:col-span-7 space-y-8">
+<div>
+<h1 class="font-headline-md text-headline-md text-text-primary mb-2">Professional Background</h1>
+<p class="font-body-md text-body-md text-text-secondary max-w-md">Select your current career level to help our AI tailor the optimization engine to your specific industry standards.</p>
+</div>
+<div class="grid grid-cols-2 gap-base md:gap-4" id="role-container">
+<!-- Role Card: Student -->
+<button class="flex flex-col items-start p-6 bg-surface border border-border-muted hover:border-primary/50 transition-all text-left group" onclick="selectRole(this)">
+<span class="material-symbols-outlined text-primary mb-4" style="font-size: 32px;">school</span>
+<span class="font-label-md text-label-md text-primary mb-1 uppercase tracking-widest">Student</span>
+<span class="font-body-sm text-body-sm text-text-secondary">Fresh talent, internships, and university graduates.</span>
+</button>
+<!-- Role Card: Entry-level -->
+<button class="flex flex-col items-start p-6 bg-surface border border-border-muted hover:border-primary/50 transition-all text-left group role-card-active" onclick="selectRole(this)">
+<span class="material-symbols-outlined text-primary mb-4" style="font-size: 32px;">keyboard</span>
+<span class="font-label-md text-label-md text-primary mb-1 uppercase tracking-widest">Entry-level</span>
+<span class="font-body-sm text-body-sm text-text-secondary">Early career professionals with 0-3 years experience.</span>
+</button>
+<!-- Role Card: Mid-career -->
+<button class="flex flex-col items-start p-6 bg-surface border border-border-muted hover:border-primary/50 transition-all text-left group" onclick="selectRole(this)">
+<span class="material-symbols-outlined text-primary mb-4" style="font-size: 32px;">trending_up</span>
+<span class="font-label-md text-label-md text-primary mb-1 uppercase tracking-widest">Mid-career</span>
+<span class="font-body-sm text-body-sm text-text-secondary">Established experts with 4-8 years experience.</span>
+</button>
+<!-- Role Card: Senior -->
+<button class="flex flex-col items-start p-6 bg-surface border border-border-muted hover:border-primary/50 transition-all text-left group" onclick="selectRole(this)">
+<span class="material-symbols-outlined text-primary mb-4" style="font-size: 32px;">verified</span>
+<span class="font-label-md text-label-md text-primary mb-1 uppercase tracking-widest">Senior / Lead</span>
+<span class="font-body-sm text-body-sm text-text-secondary">Management, directors, and principal level roles.</span>
+</button>
+</div>
+</div>
+<!-- Right Column: AI Analysis Upload -->
+<div class="md:col-span-5">
+<div class="bg-surface border border-border-muted p-8 h-full flex flex-col justify-between">
+<div>
+<div class="flex items-center gap-2 mb-4">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">bolt</span>
+<span class="font-label-md text-label-md text-text-primary uppercase tracking-widest">AI Optimizer</span>
+</div>
+<h2 class="font-headline-sm text-headline-sm text-text-primary mb-4">Sync Resume Data</h2>
+<p class="font-body-sm text-body-sm text-text-secondary mb-8 leading-relaxed">
+                            Upload your current PDF or Word resume. Our neural parser will extract key achievements, technical stacks, and metrics to pre-fill your optimized profile.
+                        </p>
+<!-- Upload Area -->
+<div class="border-2 border-dashed border-border-muted p-12 flex flex-col items-center justify-center gap-4 group cursor-pointer hover:bg-surface-container-high transition-all duration-200" id="dropzone">
+<span class="material-symbols-outlined text-text-secondary group-hover:text-primary transition-colors" style="font-size: 48px;">upload_file</span>
+<div class="text-center">
+<p class="font-body-md text-body-md text-text-primary">Drag &amp; drop or <span class="text-primary underline decoration-2 underline-offset-4">browse</span></p>
+<p class="font-mono-label text-mono-label text-text-secondary mt-2">PDF, DOCX (Max 10MB)</p>
+</div>
+</div>
+</div>
+<div class="mt-8 pt-8 border-t border-border-muted">
+<div class="flex items-center justify-between mb-6">
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
+<span class="font-mono-label text-mono-label text-text-secondary">Analysis Ready</span>
+</div>
+<span class="font-mono-label text-mono-label text-text-secondary">SECURE 256-BIT</span>
+</div>
+<div class="flex gap-4">
+<button class="flex-1 bg-surface-container-high text-text-primary border border-border-muted py-3 px-6 font-label-md text-label-md uppercase tracking-widest hover:bg-surface-container-highest transition-all active:scale-95">Back</button>
+<button class="flex-[2] bg-primary text-on-primary-container py-3 px-6 font-label-md text-label-md uppercase tracking-widest hover:opacity-90 transition-all active:scale-95 shadow-[0_0_20px_-5px_rgba(70,241,211,0.3)]">Continue</button>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Decorative Info Feed (Bento Style) -->
+<section class="mt-12 grid grid-cols-1 md:grid-cols-3 gap-base">
+<div class="p-4 border border-border-muted bg-surface-container-low flex items-center gap-4">
+<span class="material-symbols-outlined text-primary">analytics</span>
+<div>
+<p class="font-label-md text-label-md text-text-primary">94% Accuracy</p>
+<p class="font-body-sm text-body-sm text-text-secondary">Parsing engine reliability</p>
+</div>
+</div>
+<div class="p-4 border border-border-muted bg-surface-container-low flex items-center gap-4">
+<span class="material-symbols-outlined text-secondary">security</span>
+<div>
+<p class="font-label-md text-label-md text-text-primary">Data Privacy</p>
+<p class="font-body-sm text-body-sm text-text-secondary">Encrypted storage &amp; anonymization</p>
+</div>
+</div>
+<div class="p-4 border border-border-muted bg-surface-container-low flex items-center gap-4">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">speed</span>
+<div>
+<p class="font-label-md text-label-md text-text-primary">Instant Scan</p>
+<p class="font-body-sm text-body-sm text-text-secondary">&lt; 3 seconds per document</p>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer Identity -->
+<footer class="mt-auto py-8 px-margin-desktop max-w-max-width mx-auto border-t border-border-muted/30">
+<div class="flex flex-col md:flex-row justify-between items-center gap-4">
+<div class="font-label-md text-label-md text-text-secondary">© 2024 RESUMEAI PRO SUITE</div>
+<div class="flex gap-6">
+<a class="font-label-md text-label-md text-text-secondary hover:text-primary transition-colors uppercase" href="#">Terms</a>
+<a class="font-label-md text-label-md text-text-secondary hover:text-primary transition-colors uppercase" href="#">Privacy</a>
+<a class="font-label-md text-label-md text-text-secondary hover:text-primary transition-colors uppercase" href="#">API</a>
+</div>
+</div>
+</footer>
+<script>
+        function selectRole(element) {
+            // Remove active class from all roles
+            const roles = document.querySelectorAll('#role-container button');
+            roles.forEach(role => {
+                role.classList.remove('role-card-active');
+            });
+            // Add active class to selected role
+            element.classList.add('role-card-active');
+        }
+
+        // Drag and Drop Micro-interaction
+        const dropzone = document.getElementById('dropzone');
+        
+        dropzone.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            dropzone.classList.add('bg-surface-container-highest', 'border-primary');
+        });
+
+        dropzone.addEventListener('dragleave', () => {
+            dropzone.classList.remove('bg-surface-container-highest', 'border-primary');
+        });
+
+        dropzone.addEventListener('drop', (e) => {
+            e.preventDefault();
+            dropzone.classList.remove('bg-surface-container-highest', 'border-primary');
+            alert('File analysis simulation started...');
+        });
+    </script>
+</body></html>

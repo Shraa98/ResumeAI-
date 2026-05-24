@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>ResumeAI - Onboarding: Career Goals</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&amp;family=Clash+Display:wght@500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-secondary": "#452b00",
+                        "text-secondary": "#94A3B8",
+                        "on-error": "#690005",
+                        "text-primary": "#F0EDE6",
+                        "on-background": "#dee1f7",
+                        "on-tertiary-fixed-variant": "#6b3b00",
+                        "inverse-primary": "#006b5c",
+                        "error-container": "#93000a",
+                        "surface-container": "#1a1f2f",
+                        "surface-bright": "#343949",
+                        "on-primary-fixed": "#00201b",
+                        "inverse-on-surface": "#2b3040",
+                        "error": "#ffb4ab",
+                        "surface-dim": "#0e1322",
+                        "on-secondary-container": "#4f3100",
+                        "secondary-fixed": "#ffddb4",
+                        "tertiary": "#ffd0a7",
+                        "primary-fixed-dim": "#26dec2",
+                        "background": "#0e1322",
+                        "primary-container": "#00d4b8",
+                        "secondary-container": "#dc9100",
+                        "on-surface-variant": "#bacac5",
+                        "primary-fixed": "#55fbde",
+                        "surface-container-highest": "#2f3445",
+                        "on-tertiary-container": "#723f00",
+                        "on-primary-container": "#00564a",
+                        "on-secondary-fixed-variant": "#633f00",
+                        "on-secondary-fixed": "#291800",
+                        "secondary": "#ffb955",
+                        "tertiary-fixed": "#ffdcc0",
+                        "on-primary": "#00382f",
+                        "outline": "#84948f",
+                        "surface-container-low": "#161b2b",
+                        "surface": "#1E2A3B",
+                        "inverse-surface": "#dee1f7",
+                        "on-primary-fixed-variant": "#005045",
+                        "secondary-fixed-dim": "#ffb955",
+                        "on-tertiary": "#4b2800",
+                        "surface-container-lowest": "#090e1c",
+                        "outline-variant": "#3b4a46",
+                        "on-surface": "#dee1f7",
+                        "tertiary-fixed-dim": "#ffb875",
+                        "surface-container-high": "#25293a",
+                        "on-tertiary-fixed": "#2d1600",
+                        "surface-variant": "#2f3445",
+                        "border-muted": "#2A3A4E",
+                        "tertiary-container": "#ffaa55",
+                        "surface-tint": "#26dec2",
+                        "on-error-container": "#ffdad6",
+                        "primary": "#46f1d3"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "margin-desktop": "32px",
+                        "max-width": "1440px",
+                        "gutter": "16px",
+                        "margin-mobile": "16px",
+                        "base": "4px"
+                    },
+                    "fontFamily": {
+                        "body-sm": ["DM Sans"],
+                        "headline-lg": ["Clash Display"],
+                        "label-md": ["DM Sans"],
+                        "headline-sm": ["Clash Display"],
+                        "body-lg": ["DM Sans"],
+                        "headline-lg-mobile": ["Clash Display"],
+                        "headline-md": ["Clash Display"],
+                        "body-md": ["DM Sans"],
+                        "mono-label": ["DM Sans"]
+                    },
+                    "fontSize": {
+                        "body-sm": ["13px", {"lineHeight": "1.4", "fontWeight": "400"}],
+                        "headline-lg": ["48px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "600"}],
+                        "label-md": ["12px", {"lineHeight": "1", "letterSpacing": "0.05em", "fontWeight": "700"}],
+                        "headline-sm": ["24px", {"lineHeight": "1.3", "fontWeight": "500"}],
+                        "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                        "headline-lg-mobile": ["32px", {"lineHeight": "1.2", "fontWeight": "600"}],
+                        "headline-md": ["32px", {"lineHeight": "1.2", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                        "body-md": ["15px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                        "mono-label": ["12px", {"lineHeight": "1", "letterSpacing": "0", "fontWeight": "500"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .custom-checkbox:checked + label {
+            border-color: #46f1d3;
+            background-color: rgba(70, 241, 211, 0.05);
+        }
+        .custom-checkbox:checked + label .check-icon {
+            opacity: 1;
+            transform: scale(1);
+        }
+        .kinetic-bg {
+            background-image: radial-gradient(circle at 2px 2px, #2A3A4E 1px, transparent 0);
+            background-size: 24px 24px;
+        }
+    </style>
+</head>
+<body class="bg-background text-text-primary font-body-md min-h-screen selection:bg-primary selection:text-on-primary">
+<!-- Linear Onboarding Shell: Simplified Header -->
+<header class="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-md border-b border-border-muted">
+<div class="max-w-max-width mx-auto px-margin-desktop py-4 flex justify-between items-center">
+<span class="font-headline-sm text-headline-sm font-semibold text-primary tracking-tight">ResumeAI</span>
+<div class="flex items-center gap-4">
+<button class="text-text-secondary hover:text-text-primary transition-colors flex items-center gap-2 font-label-md text-label-md">
+<span class="material-symbols-outlined text-[18px]">help</span>
+                    Support
+                </button>
+</div>
+</div>
+</header>
+<main class="pt-24 pb-12 px-margin-mobile md:px-0 flex flex-col items-center justify-center min-h-screen kinetic-bg">
+<!-- Onboarding Container -->
+<div class="w-full max-w-[640px] animate-in fade-in slide-in-from-bottom-4 duration-700">
+<!-- Progress Indicator -->
+<div class="flex items-center justify-between mb-12 px-2">
+<div class="flex flex-col gap-2 items-start opacity-40">
+<span class="font-label-md text-label-md uppercase tracking-widest text-text-secondary">01 Details</span>
+<div class="h-1 w-24 bg-border-muted"></div>
+</div>
+<div class="flex flex-col gap-2 items-start opacity-40">
+<span class="font-label-md text-label-md uppercase tracking-widest text-text-secondary">02 History</span>
+<div class="h-1 w-24 bg-border-muted"></div>
+</div>
+<div class="flex flex-col gap-2 items-start">
+<span class="font-label-md text-label-md uppercase tracking-widest text-primary">03 Goals</span>
+<div class="h-1 w-24 bg-primary"></div>
+</div>
+</div>
+<!-- Content Card -->
+<div class="bg-surface border border-border-muted p-8 md:p-12">
+<div class="mb-10">
+<h1 class="font-headline-md text-headline-md mb-3 text-text-primary">What are your primary career goals?</h1>
+<p class="text-text-secondary font-body-md text-body-md">We’ll tailor your dashboard and AI suggestions based on your objectives.</p>
+</div>
+<!-- Goal Selection Grid -->
+<form action="#" class="space-y-3" id="goals-form">
+<div class="grid grid-cols-1 gap-3">
+<!-- Option 1 -->
+<div class="relative">
+<input class="custom-checkbox hidden peer" id="goal-optimize" name="goal" type="checkbox" value="Optimize Resume"/>
+<label class="flex items-center justify-between p-5 bg-surface-container-low border border-border-muted cursor-pointer transition-all duration-200 hover:border-text-secondary peer-checked:border-primary peer-checked:bg-primary/5" for="goal-optimize">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-text-secondary peer-checked:text-primary">description</span>
+<span class="font-body-lg text-body-lg">Optimize Resume</span>
+</div>
+<span class="check-icon opacity-0 scale-50 transition-all duration-200 material-symbols-outlined text-primary" data-weight="fill">check_circle</span>
+</label>
+</div>
+<!-- Option 2 -->
+<div class="relative">
+<input class="custom-checkbox hidden peer" id="goal-practice" name="goal" type="checkbox" value="Practice Interviews"/>
+<label class="flex items-center justify-between p-5 bg-surface-container-low border border-border-muted cursor-pointer transition-all duration-200 hover:border-text-secondary peer-checked:border-primary peer-checked:bg-primary/5" for="goal-practice">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-text-secondary peer-checked:text-primary">forum</span>
+<span class="font-body-lg text-body-lg">Practice Interviews</span>
+</div>
+<span class="check-icon opacity-0 scale-50 transition-all duration-200 material-symbols-outlined text-primary" data-weight="fill">check_circle</span>
+</label>
+</div>
+<!-- Option 3 -->
+<div class="relative">
+<input class="custom-checkbox hidden peer" id="goal-research" name="goal" type="checkbox" value="Research Companies"/>
+<label class="flex items-center justify-between p-5 bg-surface-container-low border border-border-muted cursor-pointer transition-all duration-200 hover:border-text-secondary peer-checked:border-primary peer-checked:bg-primary/5" for="goal-research">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-text-secondary peer-checked:text-primary">search</span>
+<span class="font-body-lg text-body-lg">Research Companies</span>
+</div>
+<span class="check-icon opacity-0 scale-50 transition-all duration-200 material-symbols-outlined text-primary" data-weight="fill">check_circle</span>
+</label>
+</div>
+<!-- Option 4 -->
+<div class="relative">
+<input class="custom-checkbox hidden peer" id="goal-track" name="goal" type="checkbox" value="Track Applications"/>
+<label class="flex items-center justify-between p-5 bg-surface-container-low border border-border-muted cursor-pointer transition-all duration-200 hover:border-text-secondary peer-checked:border-primary peer-checked:bg-primary/5" for="goal-track">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-text-secondary peer-checked:text-primary">assignment_turned_in</span>
+<span class="font-body-lg text-body-lg">Track Applications</span>
+</div>
+<span class="check-icon opacity-0 scale-50 transition-all duration-200 material-symbols-outlined text-primary" data-weight="fill">check_circle</span>
+</label>
+</div>
+</div>
+<!-- Footer Action -->
+<div class="pt-10 flex flex-col items-center gap-6">
+<button class="w-full bg-primary text-on-primary py-4 px-8 font-label-md text-label-md uppercase tracking-widest hover:brightness-110 active:scale-[0.98] transition-all duration-150 flex items-center justify-center gap-3" type="submit">
+                            Complete Setup
+                            <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+</button>
+<p class="text-text-secondary font-mono-label text-mono-label opacity-60">
+                            PRESS <span class="border border-border-muted px-1.5 py-0.5 rounded mx-1">ENTER</span> TO FINISH
+                        </p>
+</div>
+</form>
+</div>
+<!-- Contextual Insight -->
+<div class="mt-8 grid grid-cols-1 md:grid-cols-2 gap-4">
+<div class="bg-surface-container-lowest border border-border-muted p-4 flex gap-4 items-start">
+<div class="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-primary text-[18px]">bolt</span>
+</div>
+<div>
+<p class="font-label-md text-label-md text-text-primary mb-1">AI Recommendation</p>
+<p class="text-body-sm text-body-sm text-text-secondary">Most users start with Resume Optimization to see immediate scoring improvements.</p>
+</div>
+</div>
+<div class="bg-surface-container-lowest border border-border-muted p-4 flex gap-4 items-start">
+<div class="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-primary text-[18px]">security</span>
+</div>
+<div>
+<p class="font-label-md text-label-md text-text-primary mb-1">Privacy Focused</p>
+<p class="text-body-sm text-body-sm text-text-secondary">Your goals are private and only used to configure your unique toolkit experience.</p>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Footer Meta -->
+<footer class="fixed bottom-0 left-0 right-0 p-8 flex justify-between items-center pointer-events-none">
+<div class="flex items-center gap-6 opacity-30">
+<span class="font-mono-label text-mono-label tracking-tighter">SECURE CONNECTION: 256-BIT</span>
+<span class="font-mono-label text-mono-label tracking-tighter">LATENCY: 12MS</span>
+</div>
+<div class="opacity-30">
+<span class="font-mono-label text-mono-label tracking-tighter">© 2024 RESUMEAI CORP.</span>
+</div>
+</footer>
+<script>
+        // Micro-interaction for form submission and keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter') {
+                const form = document.getElementById('goals-form');
+                // Simulate submission
+                console.log('Completing setup...');
+                form.classList.add('opacity-50', 'pointer-events-none');
+            }
+        });
+
+        const checkboxes = document.querySelectorAll('.custom-checkbox');
+        checkboxes.forEach(cb => {
+            cb.addEventListener('change', function() {
+                const parent = this.closest('label');
+                if (this.checked) {
+                    parent.style.transform = 'translateX(4px)';
+                } else {
+                    parent.style.transform = 'translateX(0)';
+                }
+            });
+        });
+
+        document.getElementById('goals-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            // In a real app, this would navigate to the dashboard
+            const btn = this.querySelector('button');
+            btn.innerHTML = '<span class="material-symbols-outlined animate-spin">refresh</span> Finalizing...';
+            setTimeout(() => {
+                alert('Onboarding Complete! Redirecting to Dashboard...');
+            }, 1000);
+        });
+    </script>
+</body></html>

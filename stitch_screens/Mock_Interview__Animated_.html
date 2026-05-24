@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>ResumeAI | Focus Interview Mode</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&amp;display=swap" rel="stylesheet"/>
+<link href="https://api.fontshare.com/v2/css?f[]=clash-display@200,300,400,500,600,700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        body {
+            background-color: #0A0F1E;
+            color: #F0EDE6;
+            font-family: 'DM Sans', sans-serif;
+            overflow-x: hidden;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        
+        /* Soundwave Animation */
+        .sound-bar {
+            animation: soundWave 1s ease-in-out infinite;
+            transform-origin: bottom;
+        }
+        @keyframes soundWave {
+            0%, 100% { transform: scaleY(0.4); }
+            50% { transform: scaleY(1); }
+        }
+
+        /* Blinking Cursor Animation */
+        .cursor-blink {
+            animation: blink 1s step-end infinite;
+        }
+        @keyframes blink {
+            from, to { opacity: 1; }
+            50% { opacity: 0; }
+        }
+
+        /* Microphone Pulse Animation */
+        .mic-pulse {
+            animation: micPulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+        @keyframes micPulse {
+            0% { 
+                transform: scale(1);
+                box-shadow: 0 0 0 0 rgba(0, 212, 184, 0.7);
+            }
+            70% { 
+                transform: scale(1.05);
+                box-shadow: 0 0 0 20px rgba(0, 212, 184, 0);
+            }
+            100% { 
+                transform: scale(1);
+                box-shadow: 0 0 0 0 rgba(0, 212, 184, 0);
+            }
+        }
+
+        /* Accessibility: Prefers Reduced Motion */
+        @media (prefers-reduced-motion: reduce) {
+            .sound-bar, .cursor-blink, .mic-pulse, .pulse-ring {
+                animation: none !important;
+            }
+        }
+
+        .pulse-ring {
+            animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+        @keyframes pulse {
+            0% { transform: scale(1); opacity: 0.8; }
+            70% { transform: scale(1.5); opacity: 0; }
+            100% { transform: scale(1.5); opacity: 0; }
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "text-primary": "#F0EDE6",
+                        "text-secondary": "#94A3B8",
+                        "primary": "#46f1d3",
+                        "background": "#0A0F1E",
+                        "surface": "#1E2A3B",
+                        "border-muted": "#2A3A4E",
+                        "error": "#ffb4ab",
+                        "tertiary": "#ffd0a7",
+                        "surface-container-high": "#25293a",
+                        "surface-container-low": "#161b2b"
+                    },
+                    "fontFamily": {
+                        "headline-md": ["Clash Display"],
+                        "body-md": ["DM Sans"],
+                        "headline-sm": ["Clash Display"],
+                        "mono-label": ["DM Sans"]
+                    },
+                    "fontSize": {
+                        "headline-md": ["32px", {"lineHeight": "1.2", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                        "body-md": ["15px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                        "headline-sm": ["24px", {"lineHeight": "1.3", "fontWeight": "500"}],
+                        "label-md": ["12px", {"lineHeight": "1", "letterSpacing": "0.05em", "fontWeight": "700"}]
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-background text-text-primary antialiased">
+<!-- Top Navigation Bar -->
+<header class="flex items-center justify-between px-margin-desktop h-16 border-b border-border-muted bg-background sticky top-0 z-50">
+<div class="flex items-center gap-2">
+<span class="font-headline-sm text-headline-sm font-semibold text-primary tracking-tight">ResumeAI</span>
+</div>
+<button class="px-4 py-1.5 border border-error/50 text-error hover:bg-error/10 transition-colors font-label-md text-label-md uppercase tracking-wider">
+            End Session
+        </button>
+</header>
+<main class="max-w-[1440px] mx-auto px-margin-desktop py-8 flex justify-center">
+<!-- Center Column -->
+<div class="w-full lg:w-[60%] flex flex-col gap-6">
+<!-- Context Bar -->
+<div class="w-full bg-surface border border-border-muted px-6 py-4 flex items-center justify-between">
+<div class="flex items-center gap-4">
+<span class="text-text-secondary font-label-md text-label-md uppercase tracking-widest">Google — Frontend Engineer Interview</span>
+<div class="h-4 w-px bg-border-muted"></div>
+<span class="text-text-primary font-body-md text-body-md">Question 3 of 8</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-[18px]">timer</span>
+<span class="font-mono text-primary font-bold text-lg tracking-tighter" id="timer">04:32</span>
+</div>
+</div>
+<!-- AI Interviewer Card -->
+<div class="bg-surface border border-border-muted p-8 relative overflow-hidden">
+<div class="flex items-center gap-3 mb-6">
+<div class="w-10 h-10 bg-primary/10 border border-primary/30 flex items-center justify-center">
+<div class="w-4 h-4 bg-primary rotate-45"></div>
+</div>
+<div>
+<p class="text-primary font-label-md text-label-md uppercase tracking-wider">AI Interviewer — Maya</p>
+<p class="text-text-secondary text-[11px] uppercase tracking-[0.2em]">Synthesizing response...</p>
+</div>
+</div>
+<h2 class="font-headline-md text-headline-md mb-8 leading-tight">
+                    "Tell me about a time you led a cross-functional team under a tight deadline."
+                </h2>
+<div class="flex items-end gap-1 h-12">
+<div class="sound-bar w-1.5 bg-primary/40" style="animation-delay: 0.1s; animation-duration: 0.9s;"></div>
+<div class="sound-bar w-1.5 bg-primary/60" style="animation-delay: 0.3s; animation-duration: 1.2s;"></div>
+<div class="sound-bar w-1.5 bg-primary" style="animation-delay: 0.2s; animation-duration: 1.5s;"></div>
+<div class="sound-bar w-1.5 bg-primary/80" style="animation-delay: 0.5s; animation-duration: 0.8s;"></div>
+<div class="sound-bar w-1.5 bg-primary/50" style="animation-delay: 0.4s; animation-duration: 1.1s;"></div>
+<div class="sound-bar w-1.5 bg-primary/70" style="animation-delay: 0.6s; animation-duration: 1.3s;"></div>
+<div class="sound-bar w-1.5 bg-primary/40" style="animation-delay: 0.15s; animation-duration: 1.0s;"></div>
+</div>
+</div>
+<!-- User Response & Recording Section -->
+<div class="flex flex-col items-center gap-8 py-4">
+<div class="relative">
+<!-- Pulse rings -->
+<div class="absolute inset-0 bg-primary/20 rounded-full pulse-ring" style="animation-delay: 0s;"></div>
+<div class="absolute inset-0 bg-primary/10 rounded-full pulse-ring" style="animation-delay: 1s;"></div>
+<button class="relative w-20 h-20 bg-primary rounded-full flex items-center justify-center text-background shadow-[0_0_30px_rgba(70,241,211,0.3)] hover:scale-105 transition-transform group mic-pulse">
+<span class="material-symbols-outlined text-[32px] group-active:scale-90 transition-transform">mic</span>
+</button>
+</div>
+<div class="text-center">
+<p class="text-[#F5A623] font-label-md text-label-md uppercase tracking-widest flex items-center justify-center gap-2">
+<span class="w-2 h-2 bg-[#F5A623] rounded-full animate-pulse"></span>
+                        Recording... 0:08
+                    </p>
+</div>
+<!-- Transcript Box -->
+<div class="w-full bg-surface-container-low border border-border-muted p-6 min-h-[120px] relative">
+<p class="text-text-primary font-body-md text-body-md leading-relaxed">
+                        "So last year I was leading a team of four engineers... we were tasked with migrating the entire legacy database to a new GraphQL-based architecture in just three weeks. It was a high-stakes environment where communication was paramount."<span class="inline-block w-2 h-5 bg-primary ml-1 align-middle cursor-blink"></span>
+</p>
+<div class="absolute bottom-2 right-4">
+<span class="text-[10px] text-text-secondary uppercase font-mono tracking-widest">Live Transcription v2.4</span>
+</div>
+</div>
+</div>
+<!-- STAR Tracker -->
+<div class="grid grid-cols-4 gap-3 mt-4">
+<div class="bg-primary px-4 py-2 flex items-center justify-between">
+<span class="text-background font-label-md text-label-md">S — SITUATION</span>
+<span class="material-symbols-outlined text-background text-[16px]" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</div>
+<div class="bg-primary px-4 py-2 flex items-center justify-between">
+<span class="text-background font-label-md text-label-md">T — TASK</span>
+<span class="material-symbols-outlined text-background text-[16px]" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</div>
+<div class="border border-primary px-4 py-2 flex items-center justify-between group">
+<span class="text-primary font-label-md text-label-md">A — ACTION</span>
+<span class="flex gap-0.5">
+<span class="w-1 h-1 bg-primary rounded-full animate-bounce" style="animation-delay: 0s"></span>
+<span class="w-1 h-1 bg-primary rounded-full animate-bounce" style="animation-delay: 0.2s"></span>
+<span class="w-1 h-1 bg-primary rounded-full animate-bounce" style="animation-delay: 0.4s"></span>
+</span>
+</div>
+<div class="bg-surface-container-high/50 border border-border-muted px-4 py-2 flex items-center justify-between opacity-50">
+<span class="text-text-secondary font-label-md text-label-md">R — RESULT</span>
+</div>
+</div>
+</div>
+</main>
+<!-- Visual Atmosphere: Background Noise Overlay -->
+<div class="fixed inset-0 pointer-events-none opacity-[0.03] z-[100]" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuB5AMI6PFjOsAbFLWx-_i0PFOunJpsdicL-LdEn0IChsYC5k-W_7Xe1qJMq4fsP_4E-9sWlnEdfC6l1dm4Km-KUf9_r-QPE-6zeO8laHy1bnkHi8yemEMHxOsWn9qIz-2YBHvF87KtZxk9fkOXGPRLv9CR9qphoh6tc_Ynq7KaI0GYxvXGVCLZTN_ojlMmoC_Jj_D14AwNML8UxA14N7kMeqpGtXedjMMHEOfMNRBfNSV3blRV4kouQQJ4OpWo0AuZjmCOLR7Dt2EA');"></div>
+<script>
+        // Simple timer logic
+        let time = 272; // 04:32 in seconds
+        const timerElement = document.getElementById('timer');
+
+        setInterval(() => {
+            if (time > 0) {
+                time--;
+                const mins = Math.floor(time / 60);
+                const secs = time % 60;
+                timerElement.textContent = `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+            }
+        }, 1000);
+    </script>
+</body></html>

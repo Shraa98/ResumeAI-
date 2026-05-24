@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>ResumeAI | Editor</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&amp;family=Clash+Display:wght@500;600;700&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        ::-webkit-scrollbar {
+            width: 4px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0e1322;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #2A3A4E;
+            border-radius: 2px;
+        }
+        .resume-paper {
+            box-shadow: 0 0 0 1px rgba(0,0,0,0.05), 8px 8px 0px 0px rgba(30, 42, 59, 1);
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "on-tertiary-container": "#723f00",
+                      "inverse-primary": "#006b5c",
+                      "surface-dim": "#0e1322",
+                      "outline": "#84948f",
+                      "tertiary-fixed-dim": "#ffb875",
+                      "secondary-container": "#dc9100",
+                      "tertiary": "#ffd0a7",
+                      "on-tertiary-fixed-variant": "#6b3b00",
+                      "on-tertiary-fixed": "#2d1600",
+                      "surface-variant": "#2f3445",
+                      "surface-container-highest": "#2f3445",
+                      "primary-container": "#00d4b8",
+                      "primary-fixed": "#55fbde",
+                      "surface-container-low": "#161b2b",
+                      "on-secondary-fixed": "#291800",
+                      "on-background": "#dee1f7",
+                      "surface-tint": "#26dec2",
+                      "on-primary-fixed-variant": "#005045",
+                      "background": "#0e1322",
+                      "on-error-container": "#ffdad6",
+                      "tertiary-container": "#ffaa55",
+                      "on-primary": "#00382f",
+                      "surface-container": "#1a1f2f",
+                      "on-primary-fixed": "#00201b",
+                      "inverse-surface": "#dee1f7",
+                      "on-primary-container": "#00564a",
+                      "on-tertiary": "#4b2800",
+                      "outline-variant": "#3b4a46",
+                      "secondary": "#ffb955",
+                      "surface-container-high": "#25293a",
+                      "surface-bright": "#343949",
+                      "surface": "#1E2A3B",
+                      "text-secondary": "#94A3B8",
+                      "secondary-fixed": "#ffddb4",
+                      "error-container": "#93000a",
+                      "secondary-fixed-dim": "#ffb955",
+                      "on-surface": "#dee1f7",
+                      "on-surface-variant": "#bacac5",
+                      "primary-fixed-dim": "#26dec2",
+                      "surface-container-lowest": "#090e1c",
+                      "border-muted": "#2A3A4E",
+                      "primary": "#46f1d3",
+                      "inverse-on-surface": "#2b3040",
+                      "tertiary-fixed": "#ffdcc0",
+                      "error": "#ffb4ab",
+                      "text-primary": "#F0EDE6",
+                      "on-secondary-fixed-variant": "#633f00",
+                      "on-error": "#690005",
+                      "on-secondary-container": "#4f3100",
+                      "on-secondary": "#452b00"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.125rem",
+                      "lg": "0.25rem",
+                      "xl": "0.5rem",
+                      "full": "0.75rem"
+              },
+              "spacing": {
+                      "max-width": "1440px",
+                      "margin-desktop": "32px",
+                      "base": "4px",
+                      "margin-mobile": "16px",
+                      "gutter": "16px"
+              },
+              "fontFamily": {
+                      "headline-lg": ["Clash Display"],
+                      "mono-label": ["DM Sans"],
+                      "headline-md": ["Clash Display"],
+                      "body-lg": ["DM Sans"],
+                      "label-md": ["DM Sans"],
+                      "headline-sm": ["Clash Display"],
+                      "body-md": ["DM Sans"],
+                      "body-sm": ["DM Sans"]
+              },
+              "fontSize": {
+                      "headline-lg": ["48px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "600"}],
+                      "mono-label": ["12px", {"lineHeight": "1", "letterSpacing": "0", "fontWeight": "500"}],
+                      "headline-md": ["32px", {"lineHeight": "1.2", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                      "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                      "label-md": ["12px", {"lineHeight": "1", "letterSpacing": "0.05em", "fontWeight": "700"}],
+                      "headline-sm": ["24px", {"lineHeight": "1.3", "fontWeight": "500"}],
+                      "body-md": ["15px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                      "body-sm": ["13px", {"lineHeight": "1.4", "fontWeight": "400"}]
+              }
+            },
+          },
+        }
+      </script>
+</head>
+<body class="bg-surface-container-lowest text-on-surface font-body-md overflow-hidden">
+<!-- Sidebar (Shared Component Anchor) -->
+<aside class="fixed left-0 top-0 h-full flex flex-col z-50 w-[240px] border-r border-border-muted bg-surface-container-low">
+<div class="p-6">
+<div class="flex items-center gap-2 mb-8">
+<div class="w-8 h-8 bg-primary rounded flex items-center justify-center">
+<span class="material-symbols-outlined text-on-primary text-[20px]" data-weight="fill">description</span>
+</div>
+<span class="font-headline-sm text-headline-sm font-semibold text-primary tracking-tight">ResumeAI</span>
+</div>
+<nav class="space-y-1">
+<a class="flex items-center gap-3 px-4 py-3 text-text-secondary hover:text-text-primary hover:bg-surface-container-high transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span class="font-body-md">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-primary border-l-2 border-primary bg-surface-container-high font-semibold" href="#">
+<span class="material-symbols-outlined" data-icon="description">description</span>
+<span class="font-body-md">Resume</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-text-secondary hover:text-text-primary hover:bg-surface-container-high transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="record_voice_over">record_voice_over</span>
+<span class="font-body-md">Interviews</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-text-secondary hover:text-text-primary hover:bg-surface-container-high transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="business">business</span>
+<span class="font-body-md">Company Prep</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-text-secondary hover:text-text-primary hover:bg-surface-container-high transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span class="font-body-md">Settings</span>
+</a>
+</nav>
+</div>
+<div class="mt-auto p-6 border-t border-border-muted">
+<a class="flex items-center gap-3 px-4 py-3 text-text-secondary hover:text-text-primary transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="logout">logout</span>
+<span class="font-body-md">Logout</span>
+</a>
+</div>
+</aside>
+<!-- Main Wrapper -->
+<main class="ml-[240px] h-screen flex flex-col">
+<!-- Top App Bar (Shared Component Anchor) -->
+<header class="flex items-center justify-between px-margin-desktop h-16 border-b border-border-muted bg-background sticky top-0 z-40">
+<div class="flex items-center gap-4">
+<div class="relative flex items-center bg-surface-container-low px-3 py-1.5 border border-border-muted focus-within:border-primary transition-all">
+<span class="material-symbols-outlined text-text-secondary text-[20px]" data-icon="search">search</span>
+<input class="bg-transparent border-none focus:ring-0 text-body-sm w-64 placeholder:text-text-secondary" placeholder="Search templates..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-text-secondary hover:text-primary cursor-pointer transition-colors" data-icon="notifications">notifications</span>
+<span class="material-symbols-outlined text-text-secondary hover:text-primary cursor-pointer transition-colors" data-icon="help_outline">help_outline</span>
+<div class="w-8 h-8 rounded-full bg-surface-container-high border border-border-muted overflow-hidden">
+<img alt="User" class="w-full h-full object-cover" data-alt="A professional headshot of a software engineer in their early 30s, featuring sharp focus, clean lighting, and a neutral office background. The style is modern corporate photography with high detail and a professional, approachable expression. The lighting is soft and even, highlighting facial features clearly." src="https://lh3.googleusercontent.com/aida-public/AB6AXuD6FLNcg8J9K3tl-pCoT__4YxiryffyuDQ8Op2lFgRgANLFFrU6eYfPgwmzC8AmySq_43Hr44GZ1w99My3_Uhd41aZL73keVfwwXRisi0Iv-9bgsotXRZE7iYuwEWueWGDbDhWenbtYJahT6PSlIw9YGQ-78ar9rSLMjrpt7_eUgvECo5Cut95Ug1p6bWlLUDU7epF4qFigEwZWGyx4YYGm72jWDkeShp0KCIYDUqytVrqgsHFq7cy_90m5un0sQ_qeF6oNOi5nBDs"/>
+</div>
+</div>
+</header>
+<!-- Editor Canvas -->
+<div class="flex-1 flex overflow-hidden">
+<!-- Left Panel: Resume Viewer -->
+<section class="w-1/2 h-full flex flex-col border-r border-border-muted bg-surface-container-lowest">
+<div class="p-6 border-b border-border-muted flex items-center justify-between">
+<div class="flex items-center gap-3">
+<h1 class="font-headline-sm text-headline-sm text-text-primary">Resume Editor</h1>
+<div class="flex items-center gap-2 px-2 py-1 bg-surface-container border border-border-muted rounded text-body-sm cursor-pointer hover:border-primary transition-colors">
+<span>v3 - SDE Role</span>
+<span class="material-symbols-outlined text-[16px]" data-icon="expand_more">expand_more</span>
+</div>
+</div>
+<div class="flex items-center gap-2">
+<button class="px-3 py-1.5 text-body-sm border border-border-muted text-text-secondary hover:bg-surface-container transition-colors">Preview</button>
+<button class="px-3 py-1.5 text-body-sm bg-primary text-on-primary font-bold">Export PDF</button>
+</div>
+</div>
+<div class="flex-1 overflow-y-auto p-12 bg-surface-container-low flex justify-center">
+<div class="resume-paper w-[580px] min-h-[820px] bg-[#F7F5F0] text-[#1e2a3b] p-10 font-serif leading-relaxed h-fit">
+<div class="border-b-2 border-slate-900 pb-4 mb-6">
+<h2 class="text-3xl font-bold tracking-tight mb-1">ALEX RIVERA</h2>
+<p class="text-xs uppercase tracking-widest font-bold text-slate-600">Senior Fullstack Engineer • San Francisco, CA</p>
+</div>
+<div class="mb-6">
+<h3 class="text-sm font-black uppercase tracking-wider text-slate-800 border-b border-slate-300 mb-3">Experience</h3>
+<div class="mb-4">
+<div class="flex justify-between items-baseline mb-1">
+<span class="font-bold text-base">Linear Systems</span>
+<span class="text-xs font-medium">2021 — PRESENT</span>
+</div>
+<p class="text-xs italic font-bold text-slate-600 mb-2">Senior Product Engineer</p>
+<ul class="text-[13px] space-y-2 list-none pl-1">
+<li class="flex gap-3">
+<span class="text-slate-400">•</span>
+<span>Architected a real-time collaboration engine using WebSockets and Redis, reducing latency by 45% for global teams.</span>
+</li>
+<!-- Highlighted Bullet -->
+<li class="flex gap-3 relative group">
+<div class="absolute -left-4 top-0 bottom-0 w-1 bg-[#F5A623] shadow-[0_0_12px_#F5A623]"></div>
+<span class="text-slate-400">•</span>
+<span class="bg-[#F5A623]/10 px-1 rounded">I helped lead the migration of the legacy database to a more modern infrastructure which was very successful for the engineering team.</span>
+</li>
+<li class="flex gap-3">
+<span class="text-slate-400">•</span>
+<span>Mentored 5 junior developers through weekly code reviews and technical brown-bag sessions on distributed systems.</span>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<!-- Bottom Navigation Shell -->
+<div class="p-2 border-t border-border-muted flex justify-center bg-surface-container-lowest">
+<div class="flex gap-1 bg-surface-container p-1 rounded-lg">
+<button class="px-4 py-2 text-body-sm font-bold bg-primary text-on-primary">Experience</button>
+<button class="px-4 py-2 text-body-sm text-text-secondary hover:text-text-primary transition-colors">Skills</button>
+<button class="px-4 py-2 text-body-sm text-text-secondary hover:text-text-primary transition-colors">Summary</button>
+<button class="px-4 py-2 text-body-sm text-text-secondary hover:text-text-primary transition-colors">Education</button>
+</div>
+</div>
+</section>
+<!-- Right Panel: AI Coach -->
+<section class="w-1/2 h-full flex flex-col bg-background">
+<div class="p-6 border-b border-border-muted">
+<h2 class="font-headline-sm text-headline-sm text-primary">AI Bullet Coach</h2>
+</div>
+<div class="flex-1 overflow-y-auto p-6 space-y-8">
+<!-- Selected Context -->
+<div class="space-y-3">
+<label class="text-label-md font-label-md text-text-secondary uppercase">Selected Bullet Point</label>
+<div class="bg-surface p-4 border-l-4 border-primary">
+<p class="text-body-md italic text-text-primary">"I helped lead the migration of the legacy database to a more modern infrastructure which was very successful for the engineering team."</p>
+</div>
+</div>
+<!-- Job Description Context -->
+<div class="space-y-3">
+<div class="flex justify-between items-center">
+<label class="text-label-md font-label-md text-text-secondary uppercase">Target Job Description Snippet</label>
+<span class="text-[10px] text-primary bg-primary/10 px-2 py-0.5 rounded">SDE III @ Google</span>
+</div>
+<textarea class="w-full bg-surface-container-lowest border border-border-muted rounded-lg p-4 text-body-sm text-on-surface focus:border-primary focus:ring-0 h-24 resize-none transition-all">Seeking candidates with experience in high-scale database migrations and quantitative impact on engineering velocity.</textarea>
+</div>
+<button class="w-full py-4 bg-primary text-on-primary font-bold flex items-center justify-center gap-2 hover:brightness-110 active:scale-[0.98] transition-all">
+<span class="material-symbols-outlined text-[20px]" data-icon="auto_awesome">auto_awesome</span>
+                        Rewrite with Claude
+                    </button>
+<!-- Suggested Rewrite -->
+<div class="space-y-4">
+<label class="text-label-md font-label-md text-text-secondary uppercase">Suggested Rewrite</label>
+<div class="bg-surface-bright border border-border-muted p-5 space-y-4">
+<div class="text-body-md leading-relaxed text-text-primary">
+<span class="line-through decoration-secondary text-text-secondary">I helped lead the migration of the</span>
+<span class="underline decoration-primary font-bold">Spearheaded the zero-downtime migration of</span> 
+                                legacy database to 
+                                <span class="underline decoration-primary font-bold">PostgreSQL on AWS Aurora,</span>
+<span class="line-through decoration-secondary text-text-secondary">which was very successful for the engineering team.</span>
+<span class="underline decoration-primary font-bold">improving query performance by 60% and dev-cycle speed by 15%.</span>
+</div>
+<div class="flex gap-3">
+<button class="flex-1 py-2 bg-primary text-on-primary text-body-sm font-bold">Accept &amp; Replace</button>
+<button class="flex-1 py-2 border border-border-muted text-text-primary text-body-sm font-medium hover:bg-surface transition-colors">Try Again</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Career Memory Callout -->
+<div class="m-6 p-4 bg-secondary/5 border border-secondary/20 flex items-start gap-4">
+<span class="material-symbols-outlined text-secondary" data-icon="memory">memory</span>
+<div>
+<p class="text-label-md font-label-md text-secondary uppercase mb-1">Career Memory</p>
+<p class="text-body-sm text-text-primary">AI remembers: You tend to underuse metrics. Added to coaching profile. This rewrite emphasizes percentage gains based on your past project logs.</p>
+</div>
+</div>
+</section>
+</div>
+</main>
+<script>
+        // Simple micro-interaction for textarea focus
+        const textarea = document.querySelector('textarea');
+        textarea.addEventListener('focus', () => {
+            textarea.parentElement.querySelector('label').classList.replace('text-text-secondary', 'text-primary');
+        });
+        textarea.addEventListener('blur', () => {
+            textarea.parentElement.querySelector('label').classList.replace('text-primary', 'text-text-secondary');
+        });
+    </script>
+</body></html>
