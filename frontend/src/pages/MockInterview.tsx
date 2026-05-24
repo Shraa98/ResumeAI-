@@ -1,5 +1,6 @@
 import { useState, useRef, useEffect } from "react";
 import AppShell from "../components/AppShell";
+import { Bot, Mic, Square } from "lucide-react";
 
 type Message = { role: "ai" | "user"; text: string };
 
@@ -51,7 +52,7 @@ export default function MockInterview() {
                 >
                   {msg.role === "ai" && (
                     <div className="flex items-center gap-2 mb-2">
-                      <span className="material-symbols-outlined text-primary text-[16px]">smart_toy</span>
+                      <Bot size={16} className="text-primary" />
                       <span className="text-label-md text-primary uppercase tracking-wider">AI Interviewer</span>
                     </div>
                   )}
@@ -71,9 +72,7 @@ export default function MockInterview() {
                   : "bg-primary hover:bg-primary-fixed-dim"
               }`}
             >
-              <span className="material-symbols-outlined text-background text-2xl">
-                {recording ? "stop" : "mic"}
-              </span>
+              {recording ? <Square size={24} className="text-background" /> : <Mic size={24} className="text-background" />}
             </button>
             <span className="text-body-sm text-text-secondary">
               {recording ? "Recording... tap to stop" : "Tap to answer"}

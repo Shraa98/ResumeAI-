@@ -1,4 +1,5 @@
 import AppShell from "../components/AppShell";
+import { Search } from "lucide-react";
 
 const companies = [
   { name: "Google", logo: "G", color: "text-[#4285F4]", bg: "bg-[#4285F4]/10", tags: ["L&D Principles", "System Design", "Googleyness"], count: 24 },
@@ -15,7 +16,7 @@ export default function CompanyPrep() {
       <div className="space-y-6">
         {/* Search */}
         <div className="relative">
-          <span className="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-text-secondary">search</span>
+          <Search size={18} className="absolute left-4 top-1/2 -translate-y-1/2 text-text-secondary" />
           <input
             className="w-full bg-surface border border-border-muted pl-12 pr-4 py-3 text-body-md text-text-primary placeholder-text-secondary/50 focus:outline-none focus:border-primary transition-colors"
             placeholder="Search company or role..."

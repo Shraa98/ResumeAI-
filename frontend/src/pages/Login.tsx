@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { supabase } from "../lib/supabaseClient";
 import { useAuth } from "../components/AuthProvider";
+import { FileText, MailCheck, AlertCircle } from "lucide-react";
 
 export default function Login() {
   const { user, loading } = useAuth();
@@ -75,7 +76,7 @@ export default function Login() {
         {/* Logo */}
         <div className="flex items-center gap-3 mb-10 justify-center">
           <div className="w-10 h-10 bg-primary rounded-sm flex items-center justify-center">
-            <span className="material-symbols-outlined text-background font-bold text-xl">description</span>
+            <FileText size={20} className="text-background font-bold" />
           </div>
           <div>
             <h1 className="font-display text-headline-sm font-semibold text-primary tracking-tight">ResumeAI</h1>
@@ -87,7 +88,7 @@ export default function Login() {
         <div className="bg-surface border border-border-muted p-8 space-y-6">
           {signUpSuccess ? (
             <div className="text-center space-y-4">
-              <span className="material-symbols-outlined text-5xl text-primary">mark_email_read</span>
+              <MailCheck size={48} className="text-primary" />
               <h2 className="font-display text-headline-sm text-text-primary font-semibold">Verify your email</h2>
               <p className="text-body-md text-text-secondary">
                 We sent a confirmation link to <strong className="text-text-primary">{email}</strong>. Please check your email to complete registration.
@@ -115,7 +116,7 @@ export default function Login() {
 
               {authError && (
                 <div className="p-3 bg-error/10 border border-error/20 text-error text-body-sm rounded flex items-center gap-2">
-                  <span className="material-symbols-outlined text-[18px]">error</span>
+                  <AlertCircle size={18} />
                   <span>{authError}</span>
                 </div>
               )}
