@@ -43,6 +43,7 @@ async def analyze_resume(
             "action_verbs_count": analysis.get("strong_action_verbs_count", 0),
             "metrics_count": analysis.get("metrics_usage_count", 0),
             "fallback_mode": analysis.get("fallback_mode", False),
+            "fallback_reason": analysis.get("fallback_reason", ""),
         }
     except HTTPException:
         raise

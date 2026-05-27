@@ -3,32 +3,203 @@ import AppShell from "../components/AppShell";
 import { Bot, Mic, Square } from "lucide-react";
 
 type Message = { role: "ai" | "user"; text: string };
+type InterviewStage = "intro" | "role" | "goal" | "interview";
+
+type SpeechRecognitionCtor = new () => {
+  lang: string;
+  interimResults: boolean;
+  maxAlternatives: number;
+  continuous: boolean;
+  start: () => void;
+  stop: () => void;
+  onresult: ((event: any) => void) | null;
+  onerror: ((event: any) => void) | null;
+  onend: (() => void) | null;
+};
 
 export default function MockInterview() {
   const [recording, setRecording] = useState(false);
   const [messages, setMessages] = useState<Message[]>([
-    { role: "ai", text: "Hello! I'm your AI interviewer. Let's start with: Tell me about a time you led a cross-functional team under pressure." },
+    { role: "ai", text: "Hi! Great to meet you. How are you feeling today?" },
   ]);
   const [transcript, setTranscript] = useState("");
+  const [error, setError] = useState<string | null>(null);
+  const [stage, setStage] = useState<InterviewStage>("intro");
+  const [targetRole, setTargetRole] = useState("");
+  const [sessionGoal, setSessionGoal] = useState("");
+  const recognitionRef = useRef<{
+    start: () => void;
+    stop: () => void;
+  } | null>(null);
+  const isRecordingRef = useRef(false);
+  const finalTranscriptRef = useRef("");
+  const interimTranscriptRef = useRef("");
+  const networkRetryCountRef = useRef(0);
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
 
+  useEffect(() => {
+    return () => {
+      recognitionRef.current?.stop();
+    };
+  }, []);
+
+  const getInterviewFollowup = (answer: string) => {
+    const lower = answer.toLowerCase();
+    const hasMetric = /\b\d+%|\$\d+|\b\d+\s*(users|clients|hours|days|weeks|months)\b/.test(lower);
+    const words = answer.trim().split(/\s+/).filter(Boolean).length;
+
+    if (words < 12) {
+      return "Good start. Can you expand that using STAR: Situation, Task, Action, and Result?";
+    }
+    if (!hasMetric) {
+      return "Good response. To strengthen it, add a measurable result (for example, % improvement, time saved, or revenue impact).";
+    }
+    if (lower.includes("team") || lower.includes("stakeholder") || lower.includes("collaborat")) {
+      return "Strong answer. Next question: tell me about a conflict in your team and how you resolved it.";
+    }
+    return "Great answer. Clear structure and measurable impact. Next, explain one challenge you faced and how you resolved it.";
+  };
+
+  const getAiFollowup = (answer: string) => {
+    if (stage === "intro") {
+      setStage("role");
+      return "Nice. What role are you preparing for right now?";
+    }
+
+    if (stage === "role") {
+      setTargetRole(answer.trim());
+      setStage("goal");
+      return "Awesome. What is your goal for this session: confidence, STAR storytelling, or technical clarity?";
+    }
+
+    if (stage === "goal") {
+      const role = targetRole.trim() || "your target role";
+      const goal = answer.trim() || "better interview performance";
+      setSessionGoal(goal);
+      setStage("interview");
+      return `Perfect. We'll do a focused mock interview for ${role} with emphasis on ${goal}. First question: Tell me about yourself in 60-90 seconds.`;
+    }
+
+    if (sessionGoal && targetRole) {
+      return getInterviewFollowup(answer);
+    }
+
+    return getInterviewFollowup(answer);
+  };
+
+  const commitCapturedAnswer = () => {
+    const combined = `${finalTranscriptRef.current} ${interimTranscriptRef.current}`.replace(/\s+/g, " ").trim();
+    if (!combined) {
+      return;
+    }
+
+    setMessages((m) => [
+      ...m,
+      { role: "user", text: combined },
+      { role: "ai", text: getAiFollowup(combined) },
+    ]);
+    finalTranscriptRef.current = "";
+    interimTranscriptRef.current = "";
+    setTranscript("");
+  };
+
+  const startRecording = () => {
+    setError(null);
+
+    const w = window as Window & {
+      SpeechRecognition?: SpeechRecognitionCtor;
+      webkitSpeechRecognition?: SpeechRecognitionCtor;
+    };
+    const SpeechRecognition = w.SpeechRecognition || w.webkitSpeechRecognition;
+
+    if (!SpeechRecognition) {
+      setError("Speech recognition is not supported in this browser. Please use Chrome or Edge.");
+      return;
+    }
+
+    const recognition = new SpeechRecognition();
+    recognition.lang = "en-IN";
+    recognition.interimResults = true;
+    recognition.maxAlternatives = 1;
+    recognition.continuous = true;
+    finalTranscriptRef.current = "";
+    interimTranscriptRef.current = "";
+    setTranscript("");
+
+    recognition.onresult = (event: any) => {
+      let interimText = "";
+      for (let i = event.resultIndex; i < event.results.length; i += 1) {
+        const result = event.results[i];
+        if (result.isFinal) {
+          finalTranscriptRef.current += `${result[0]?.transcript ?? ""} `;
+        } else {
+          interimText += `${result[0]?.transcript ?? ""} `;
+        }
+      }
+      interimTranscriptRef.current = interimText.trim();
+      setTranscript(interimText.trim());
+    };
+
+    recognition.onerror = (event: any) => {
+      const errorCode = event.error || "unknown";
+      if (errorCode === "network") {
+        if (networkRetryCountRef.current < 1) {
+          networkRetryCountRef.current += 1;
+          setError("Mic network hiccup detected. Retrying once...");
+          try {
+            recognition.stop();
+          } catch {
+            // ignore stop errors and continue retry path
+          }
+          setTimeout(() => {
+            if (!isRecordingRef.current) return;
+            try {
+              recognition.start();
+            } catch {
+              setRecording(false);
+              isRecordingRef.current = false;
+              setError("Mic error: network. Please check internet and retry.");
+            }
+          }, 300);
+          return;
+        }
+        setError("Mic error: network. Please check internet and retry.");
+      } else {
+        setError(`Mic error: ${errorCode}`);
+      }
+      setRecording(false);
+      isRecordingRef.current = false;
+      commitCapturedAnswer();
+    };
+
+    recognition.onend = () => {
+      setRecording(false);
+      isRecordingRef.current = false;
+      commitCapturedAnswer();
+    };
+
+    recognitionRef.current = recognition;
+    recognition.start();
+    setRecording(true);
+    isRecordingRef.current = true;
+    networkRetryCountRef.current = 0;
+  };
+
+  const stopRecording = () => {
+    recognitionRef.current?.stop();
+    setRecording(false);
+    isRecordingRef.current = false;
+  };
+
   const handleRecord = () => {
-    setRecording((r) => !r);
     if (recording) {
-      // TODO: stop MediaRecorder, POST audio to /api/interview/transcribe (Whisper)
-      // then POST transcript to /api/interview/evaluate (GPT-4o-mini)
-      setTimeout(() => {
-        setMessages((m) => [
-          ...m,
-          { role: "user", text: "I led a team of 8 engineers to deliver a critical platform migration in 6 weeks..." },
-          { role: "ai", text: "Great STAR structure! Your Situation and Task were clear. For Result, try to add a specific metric — e.g., '20% faster load time' or '$500K saved'. Want to try again?" },
-        ]);
-        setTranscript("");
-      }, 1500);
+      stopRecording();
+    } else {
+      startRecording();
     }
   };
 
@@ -77,6 +248,14 @@ export default function MockInterview() {
             <span className="text-body-sm text-text-secondary">
               {recording ? "Recording... tap to stop" : "Tap to answer"}
             </span>
+            {transcript && (
+              <p className="text-body-sm text-text-primary italic max-w-[80%] text-center">
+                {transcript}
+              </p>
+            )}
+            {error && (
+              <p className="text-body-sm text-error max-w-[85%] text-center">{error}</p>
+            )}
           </div>
         </div>
 

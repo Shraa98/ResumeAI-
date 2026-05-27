@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef } from "react";
 import { supabase } from "../lib/supabaseClient";
 import { useAuth } from "../components/AuthProvider";
 import AppShell from "../components/AppShell";
@@ -14,49 +14,18 @@ interface AnalysisResult {
   metrics_count?: number;
   word_count?: number;
   fallback_mode?: boolean;
+  fallback_reason?: string;
 }
 
 export default function ResumeUpload() {
   const [dragging, setDragging] = useState(false);
-  const [file, setFile] = useState<File | { name: string } | null>(null);
+  const [file, setFile] = useState<File | null>(null);
   const [jobDescription, setJobDescription] = useState("");
   const [analyzing, setAnalyzing] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [result, setResult] = useState<AnalysisResult | null>(null);
   const { user } = useAuth();
   const fileRef = useRef<HTMLInputElement>(null);
-
-  // Load latest resume from Supabase on mount
-  useEffect(() => {
-    if (!user) return;
-    
-    const fetchLatestResume = async () => {
-      try {
-        const { data, error } = await supabase
-          .from("resumes")
-          .select("*")
-          .eq("user_id", user.id)
-          .order("created_at", { ascending: false })
-          .limit(1)
-          .single();
-          
-        if (error && error.code !== 'PGRST116') {
-          console.error("Failed to fetch recent resume:", error);
-          return;
-        }
-        
-        if (data) {
-          setFile({ name: data.file_name });
-          setJobDescription(data.job_description || "");
-          setResult(data.result_data);
-        }
-      } catch (err) {
-        console.error("Error fetching resume:", err);
-      }
-    };
-    
-    fetchLatestResume();
-  }, [user]);
 
   const handleDrop = (e: React.DragEvent) => {
     e.preventDefault();
@@ -70,12 +39,6 @@ export default function ResumeUpload() {
 
   const handleAnalyze = async () => {
     if (!file) return;
-    
-    // If it's a restored session without the actual File object, prompt them to browse/drop again
-    if (!(file instanceof File)) {
-      setError("Please re-select or drop your resume PDF file to run the analysis again.");
-      return;
-    }
 
     setAnalyzing(true);
     setError(null);
@@ -148,8 +111,13 @@ export default function ResumeUpload() {
             <div>
               <h4 className="font-display font-semibold text-secondary text-sm uppercase tracking-wider">Local Heuristic Fallback Active</h4>
               <p className="text-body-sm text-text-secondary mt-1">
-                The backend is running in dynamic local evaluation mode because the configured <code>GEMINI_API_KEY</code> is missing, invalid, or reported as leaked. To activate full generative AI recommendations, please add a valid Gemini key in your backend <code>.env</code> file and restart the API server.
+                The backend is running in dynamic local evaluation mode because Gemini analysis failed for this request. To activate full generative AI recommendations, make sure your backend <code>GEMINI_API_KEY</code> is valid and restart the API server.
               </p>
+              {result.fallback_reason && (
+                <p className="text-[11px] text-text-secondary/80 mt-2">
+                  Reason: <code>{result.fallback_reason}</code>
+                </p>
+              )}
             </div>
           </div>
         )}

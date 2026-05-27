@@ -2,17 +2,42 @@ import google.generativeai as genai
 import json
 import re
 from app.config import settings
+from app.prompts import ANALYSIS_SYSTEM_PROMPT, build_analysis_prompt, build_bullet_rewrite_prompt
 
 
 def get_gemini_model():
     """
-    Configures and returns a Gemini 1.5 Flash model instance.
+    Configures and returns a Gemini Flash model instance.
     Returns None if the API key is not configured.
     """
     if not settings.GEMINI_API_KEY:
         return None
     genai.configure(api_key=settings.GEMINI_API_KEY)
-    return genai.GenerativeModel("gemini-1.5-pro")
+    # Prefer flash for broader key compatibility and lower latency.
+    return genai.GenerativeModel(
+        "gemini-2.0-flash",
+        system_instruction=ANALYSIS_SYSTEM_PROMPT,
+    )
+
+
+def _extract_json_object(text: str) -> dict:
+    # 1) JSON inside markdown code fences
+    json_match = re.search(r"```(?:json)?\s*([\s\S]*?)\s*```", text)
+    candidate = json_match.group(1) if json_match else text
+
+    # 2) First direct parse
+    try:
+        return json.loads(candidate)
+    except Exception:
+        pass
+
+    # 3) Parse substring bounded by outermost braces
+    start = candidate.find("{")
+    end = candidate.rfind("}")
+    if start != -1 and end != -1 and end > start:
+        return json.loads(candidate[start : end + 1])
+
+    raise ValueError("No valid JSON object found in Gemini response.")
 
 
 async def analyze_resume_with_ai(resume_text: str, job_description: str) -> dict:
@@ -26,56 +51,22 @@ async def analyze_resume_with_ai(resume_text: str, job_description: str) -> dict
     if not model:
         result = _fallback_analysis(resume_text, job_description)
         result["fallback_mode"] = True
+        result["fallback_reason"] = "missing_or_empty_gemini_api_key"
         return result
 
-    prompt = f"""You are an expert ATS (Applicant Tracking System) resume analyst. 
-Analyze the following resume against the job description and return ONLY a valid JSON response.
-
-CRITICAL SCORING RULES:
-1. Work Experience: If the candidate has ZERO formal work experience (internships and jobs), the `work_experience` score MUST be 0. Do NOT give points for academic projects in the work experience section.
-2. Contact Info: Verify presence of Email, Phone, LinkedIn, and Portfolio/GitHub. Deduct points proportionally if any are missing.
-
-RESUME:
-{resume_text[:4000]}
-
-JOB DESCRIPTION:
-{job_description[:2000]}
-
-Return EXACTLY this JSON format, no other text:
-{{
-    "company_name": "<extracted company name from JD, or 'Unknown Company'>",
-    "job_title": "<extracted job title/role from JD, or 'Unknown Role'>",
-    "ats_score": <integer 0-100, heavily weighted by work_experience and skills>,
-    "found_keywords": [<list of keywords from the JD that ARE present in the resume>],
-    "missing_keywords": [<list of important keywords from the JD that are MISSING from the resume>],
-    "section_scores": {{
-        "contact_info": <integer 0-100>,
-        "work_experience": <integer 0-100, MUST be 0 if no formal jobs/internships>,
-        "skills": <integer 0-100>,
-        "education": <integer 0-100>,
-        "formatting": <integer 0-100>
-    }},
-    "feedback": [<list of 3-5 actionable improvement suggestions>],
-    "strong_action_verbs_count": <integer>,
-    "metrics_usage_count": <integer>
-}}"""
+    prompt = build_analysis_prompt(resume_text, job_description)
 
     try:
         response = model.generate_content(prompt)
-        text = response.text.strip()
-
-        # Extract JSON from potential markdown code blocks
-        json_match = re.search(r'```(?:json)?\s*([\s\S]*?)\s*```', text)
-        if json_match:
-            text = json_match.group(1)
-
-        result = json.loads(text)
+        text = (response.text or "").strip()
+        result = _extract_json_object(text)
         result["fallback_mode"] = False
         return result
     except Exception as e:
         print(f"Gemini API error: {e}")
         result = _fallback_analysis(resume_text, job_description)
         result["fallback_mode"] = True
+        result["fallback_reason"] = f"gemini_error: {str(e)[:180]}"
         return result
 
 
@@ -88,14 +79,7 @@ async def rewrite_bullet_with_ai(bullet_text: str, job_description: str) -> str:
     if not model:
         return f"[AI Enhanced] {bullet_text}"
 
-    prompt = f"""You are an expert resume writer. Rewrite the following resume bullet point 
-to better match the target job description. Make it more impactful with strong action verbs 
-and quantifiable metrics. Keep it concise (1-2 lines max).
-
-ORIGINAL BULLET: {bullet_text}
-TARGET JOB DESCRIPTION: {job_description[:1000]}
-
-Return ONLY the rewritten bullet point, no other text."""
+    prompt = build_bullet_rewrite_prompt(bullet_text=bullet_text, job_description=job_description)
 
     try:
         response = model.generate_content(prompt)
